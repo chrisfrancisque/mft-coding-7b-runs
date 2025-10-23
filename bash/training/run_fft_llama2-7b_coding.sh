@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # Environment variables setup
-export WANDB_API_KEY=
-export HF_TOKEN=
+# export WANDB_API_KEY=${WANDB_API_KEY}
+# export HF_TOKEN=${HF_TOKEN}
 
 # Basic configuration
-NUM_GPUS=4
-CONFIG_FILE=configs/train_configs/llama2_7b_coding_fft.yaml
+NUM_GPUS=8
+CONFIG_FILE=configs/train_configs/llama2_7b_coding.yaml
 EXP_ID=fft_7b_coding
 OUTPUT_DIR=output/$EXP_ID
 LOG_FILE=output/$EXP_ID/${EXP_ID}_$(date '+%Y%m%d_%H%M%S').log
+mkdir -p "$OUTPUT_DIR"
 
 echo "Number of GPUs: $NUM_GPUS"
 echo "Using config file: $CONFIG_FILE"
@@ -23,7 +24,7 @@ echo "Using config file: $CONFIG_FILE"
     # You can also set --gradient_checkpointing or use `stage3_offloading_accelerate.conf` to save memory,
     # but it will trade off speed.
     accelerate launch \
-        --main_process_port 29400 \
+        --main_process_port 29500 \
         --mixed_precision bf16 \
         --num_machines 1 \
         --num_processes $NUM_GPUS \

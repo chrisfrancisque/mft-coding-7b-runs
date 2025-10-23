@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Environment variables setup
-export WANDB_API_KEY=
-export HF_TOKEN=
+# export WANDB_API_KEY=${WANDB_API_KEY}
+# export HF_TOKEN=${HF_TOKEN}
 
 # Basic configuration
 NUM_GPUS=8
@@ -24,6 +24,7 @@ run_experiment() {
     local EXP_ID="masktune_7b_local_${config_name}_0.9_coding"
     local OUTPUT_DIR="output/$EXP_ID"
     local LOG_FILE="output/$EXP_ID/${EXP_ID}_$(date '+%Y%m%d_%H%M%S').log"
+mkdir -p "$OUTPUT_DIR"
 
     echo "Starting experiment: $EXP_ID"
     echo "Masked layers: $masked_layers"
@@ -38,7 +39,7 @@ run_experiment() {
         # You can also set --gradient_checkpointing or use `stage3_offloading_accelerate.conf` to save memory,
         # but it will trade off speed.
         accelerate launch \
-            --main_process_port 29400 \
+            --main_process_port 29600 \
             --mixed_precision bf16 \
             --num_machines 1 \
             --num_processes $NUM_GPUS \

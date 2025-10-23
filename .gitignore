@@ -1,6 +1,24 @@
-wandb
-data/*
+# big outputs / models / caches
 output/
-**/__pycache__/
-**/*egg-info
-**/*.log
+data/
+wandb/
+hf_cache/
+**/mask_applied/
+**/eval_output/
+
+# checkpoints / weights
+*.bin
+*.safetensors
+*.pt
+*.ckpt
+
+# py + env cruft
+__pycache__/
+*.pyc
+.env
+.venv
+*.log
+
+# conda/pip lockfiles if any generated locally
+poetry.lock
+Pipfile.lock
