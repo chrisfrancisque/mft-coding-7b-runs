@@ -1,4 +1,4 @@
-# big outputs / models / caches
+# Big/ephemeral artifacts
 output/
 data/
 wandb/
@@ -6,19 +6,17 @@ hf_cache/
 **/mask_applied/
 **/eval_output/
 
-# checkpoints / weights
+# Model files
 *.bin
 *.safetensors
 *.pt
 *.ckpt
 
-# py + env cruft
+# Logs & caches (we keep our curated logs/ dir)
+*.log
 __pycache__/
 *.pyc
+
+# Envs
 .env
 .venv
-*.log
-
-# conda/pip lockfiles if any generated locally
-poetry.lock
-Pipfile.lock
